@@ -1,8 +1,10 @@
 public class Algebra {
     public static void main(String args[]) {
         // Tests some of the operations
-        System.out.println(div(30, 10));  // -- works, == works
-        System.out.println(pow(3, 5));      // 3^5 good
+        System.out.println(times(30, 1));  // -- works, == works
+        System.out.println(times(-3, 5)); 
+        System.out.println(times(-3, -5));      
+        System.out.println(times(3, -5));           // 3^5 good
         System.out.println(mod(25, 7));   // 25 % 7 good
         System.out.println(mod(120, 6));  // 120 % 6    0
         System.out.println(sqrt(36));
@@ -69,7 +71,6 @@ public class Algebra {
         {
             for(int i =0;i<x1;i++)
             {
-                x3++;
                 for(int j=0;j<x2;j++)
                 {
                     x3++;
@@ -80,7 +81,6 @@ public class Algebra {
         {
             for(int i =0;i>x1;i--)
             {
-                x3++;
                 for(int j=0;j>x2;j--)
                 {
                     x3++;
@@ -91,7 +91,6 @@ public class Algebra {
         {
             for(int i =0;i>(x1);i--)
             {
-                x3--;
                 for(int j=0;j<(x2);j++)
                 {
                     x3--;
@@ -102,7 +101,6 @@ public class Algebra {
         {
             for(int i =0;i<(x1);i++)
             {
-                x3--;
                 for(int j=0;j>(x2);j--)
                 {
                     x3--;
