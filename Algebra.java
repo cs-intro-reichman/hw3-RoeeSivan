@@ -1,7 +1,7 @@
 public class Algebra {
     public static void main(String args[]) {
         // Tests some of the operations
-        System.out.println(div(10, 5));  
+        System.out.println(div(25, 7));  
         System.out.println(div(4, 2));  
         System.out.println(div(-100, -20));  
         System.out.println(div(-100, 20));  
@@ -133,7 +133,7 @@ public class Algebra {
         {
         for (i=0;i<=x2;i++)
         {
-            if (times(x2,i)<x1)
+            if ((times(x2, i) < x1) && (plus(times(x2, i), x2) <= x1)) 
             {
                 x3++;
             }
