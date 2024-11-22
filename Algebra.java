@@ -1,15 +1,9 @@
 public class Algebra {
     public static void main(String args[]) {
         // Tests some of the operations
-        System.out.println(times(30, 1));  // -- works, == works
-        System.out.println(times(-3, 5)); 
-        System.out.println(times(-3, -5));      
-        System.out.println(times(3, -5));           // 3^5 good
-        System.out.println(mod(25, 7));   // 25 % 7 good
-        System.out.println(mod(120, 6));  // 120 % 6    0
-        System.out.println(sqrt(36));
-        System.out.println(sqrt(263169));
-        System.out.println(sqrt(76123));
+        System.out.println(div(-10, -1));  
+        System.out.println(div(-4, -1));  
+        System.out.println(div(-100, -20));  
     }
 
     public static int abs(int x) { // a method that will help me in the future - absolute value
@@ -125,36 +119,43 @@ public class Algebra {
 
     // Returns the integer part of x1 / x2
     public static int div(int x1, int x2) {
+        int quotient=0;
         int x3 = 0;
-        int sum=0;
         int i=0;
+        int sum=0;
+        boolean x1is_negative = x1<0;
+        boolean x2is_negative = x2<0;
         if(abs(x1)==abs(x2)) return 1;
-        if((x1>0)&&(x2<0)||(x1<0)&&(x2>0))//checking ++ or --
+        if(abs(x2)>abs(x1)) return 0;
+        if(x2==0) return -1;
+        if((x1>0)&&(x2>0)) // for plus plus
         {
-            while(sum<x1)
-            {
-                sum=times(x2,i);
-                x3++;
-                i++;
-            }
-            x3=times(-1,x3);
-       }
-        if((x1>0)&&(x2>0)||(x1<0)&&(x2<0))//checking ++ or --
+        for (i=0;i<=x2;i++)
         {
-            if(abs(x1)<abs(x2)) //returning 0 if the divisor is bigger
+            if (times(x2,i)<x1)
             {
-                return 0;
-            }
-            while(sum<x1)
-            {
-                sum=times(x2,i);
                 x3++;
-                i++;
             }
         }
-        return x3;
     }
-
+        if((x1is_negative)&&(x2is_negative)) // for minus minus
+        {
+            for (i = 0; abs(times(x2, i)) < abs(x1); i++) 
+            { 
+                x3++;
+            }
+            return x3;
+        }
+        if((x1is_negative)&&(!x2is_negative)||((!x1is_negative)&&(x2is_negative))) //+-
+        {
+            for (i=0;abs(times(x2,i))<=abs(x1);i++)
+            {
+                x3++;
+            }
+            x3=times(-1,x3);
+        }
+        return x3;
+        }
     // Returns x1 % x2
     public static int mod(int x1,int x2)
 	{
