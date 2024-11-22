@@ -1,13 +1,8 @@
 public class Algebra {
     public static void main(String args[]) {
         // Tests some of the operations
-        System.out.println(minus(-10, -20));  // 3 * 4  good
-        System.out.println(plus(2, times(4, 2)));  // 2 + 4 * 2 good
-        System.out.println(pow(5, 3));      // 5^3 good
+        System.out.println(div(30, 10));  // -- works, == works
         System.out.println(pow(3, 5));      // 3^5 good
-        System.out.println(div(12, 3));   // 12 / 3  good  
-        System.out.println(div(5, 5));    // 5 / 5  good
-        System.out.println(div(25, 7));   // 25 / 7 good
         System.out.println(mod(25, 7));   // 25 % 7 good
         System.out.println(mod(120, 6));  // 120 % 6    0
         System.out.println(sqrt(36));
@@ -92,7 +87,7 @@ public class Algebra {
                 }
             }
         }
-        if((x1<0)||(x2>0)) // minus *plus
+        if((x1<0)&&(x2>0)) // minus *plus
         {
             for(int i =0;i>(x1);i--)
             {
@@ -103,7 +98,7 @@ public class Algebra {
                 }
             }
         }
-        if((x1>0)||(x2<0)) // minus *plus
+        if((x1>0)&&(x2<0)) // minus *plus
         {
             for(int i =0;i<(x1);i++)
             {
@@ -114,7 +109,7 @@ public class Algebra {
                 }
             }
         }
-        return x3; // Default return in case logic fails
+        return x3; // 
     }
 
     // Returns x^n (for n >= 0)
@@ -133,13 +128,31 @@ public class Algebra {
     // Returns the integer part of x1 / x2
     public static int div(int x1, int x2) {
         int x3 = 0;
-        int sum = 0;
-        int i = 1;
-        if (x1 < x2) return 0;
-        while (sum <= minus(x1, x2)) {
-            x3++;
-            sum = times(x2, i);
-            i++;
+        int sum=0;
+        int i=0;
+        if(abs(x1)==abs(x2)) return 1;
+        if((x1>0)&&(x2<0)||(x1<0)&&(x2>0))//checking ++ or --
+        {
+            while(sum<x1)
+            {
+                sum=times(x2,i);
+                x3++;
+                i++;
+            }
+            x3=times(-1,x3);
+       }
+        if((x1>0)&&(x2>0)||(x1<0)&&(x2<0))//checking ++ or --
+        {
+            if(abs(x1)<abs(x2)) //returning 0 if the divisor is bigger
+            {
+                return 0;
+            }
+            while(sum<x1)
+            {
+                sum=times(x2,i);
+                x3++;
+                i++;
+            }
         }
         return x3;
     }
