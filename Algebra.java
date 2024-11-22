@@ -2,6 +2,7 @@ public class Algebra {
     public static void main(String args[]) {
         // Tests some of the operations
         System.out.println(div(25,7));
+        System.out.println(div(100,10));
     }
 
     public static int abs(int x) { // a method that will help me in the future - absolute value
@@ -128,7 +129,7 @@ public class Algebra {
         if(x2==0) return -1;
         if((x1>0)&&(x2>0)) // for plus plus
         {
-        while(times(x3,x2)<x1)
+        while(times(x3,x2)<=x1)
         {
             if ((times(x2, i)  <= x1))
             {
