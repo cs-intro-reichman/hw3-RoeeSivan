@@ -1,10 +1,9 @@
 public class Algebra {
     public static void main(String args[]) {
         // Tests some of the operations
-        System.out.println(div(25, 7));  
-        System.out.println(div(4, 2));  
-        System.out.println(div(-100, -20));  
-        System.out.println(div(-100, 20));  
+        System.out.println(mod(25,7));
+        System.out.println(mod(0,7));
+        System.out.println(mod(7,3));
     }
 
     public static int abs(int x) { // a method that will help me in the future - absolute value
@@ -131,9 +130,9 @@ public class Algebra {
         if(x2==0) return -1;
         if((x1>0)&&(x2>0)) // for plus plus
         {
-        for (i=0;i<=x2;i++)
+        while(times(x3,x2)<x1)
         {
-            if ((times(x2, i) < x1) && (plus(times(x2, i), x2) <= x1)) 
+            if ((times(x2, i)  <= x1))
             {
                 x3++;
             }
@@ -160,7 +159,11 @@ public class Algebra {
     // Returns x1 % x2
     public static int mod(int x1,int x2)
 	{
-		return x1;
+        int k = div(x1,x2);
+        if((times(k,x2)==x1))   return 0;
+        int r=0;
+        r=minus(x1,times(k,x2));
+		return r;
     }
 
     // Returns the integer part of sqrt(x)
