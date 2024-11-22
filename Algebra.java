@@ -1,9 +1,10 @@
 public class Algebra {
     public static void main(String args[]) {
         // Tests some of the operations
-        System.out.println(div(-10, -1));  
-        System.out.println(div(-4, -1));  
+        System.out.println(div(10, 5));  
+        System.out.println(div(4, 2));  
         System.out.println(div(-100, -20));  
+        System.out.println(div(-100, 20));  
     }
 
     public static int abs(int x) { // a method that will help me in the future - absolute value
@@ -119,10 +120,8 @@ public class Algebra {
 
     // Returns the integer part of x1 / x2
     public static int div(int x1, int x2) {
-        int quotient=0;
         int x3 = 0;
         int i=0;
-        int sum=0;
         boolean x1is_negative = x1<0;
         boolean x2is_negative = x2<0;
         if(abs(x1)==abs(x2)) return 1;
@@ -148,7 +147,7 @@ public class Algebra {
         }
         if((x1is_negative)&&(!x2is_negative)||((!x1is_negative)&&(x2is_negative))) //+-
         {
-            for (i=0;abs(times(x2,i))<=abs(x1);i++)
+            for (i=0;abs(times(x2,i))<abs(x1);i++)
             {
                 x3++;
             }
