@@ -1,9 +1,12 @@
 public class Algebra {
     public static void main(String args[]) {
         // Tests some of the operations
+        System.out.println(plus(2, -3));
+        System.out.println(minus(-2, 3));
         System.out.println(plus(2, 3));   // 2 + 3 good
         System.out.println(minus(7, 2));  // 7 - 2 good
         System.out.println(minus(2, 7));  // 2 - 7 good
+        System.out.println(minus(-2, -7));  // 2 - 7 good
         System.out.println(times(3, 4));  // 3 * 4  good
         System.out.println(plus(2, times(4, 2)));  // 2 + 4 * 2 good
         System.out.println(pow(5, 3));      // 5^3 good
@@ -34,7 +37,7 @@ public class Algebra {
             }
         }
         if ((x1 < 0) && (x2 < 0)) {
-            for (int i = 0; i < x2; i++) {
+            for (int i = 0; i > x2; i--) {
                 x1--;
             }
         }
@@ -44,71 +47,92 @@ public class Algebra {
             }
         }
         if ((x1 > 0) && (x2 < 0)) {
-            for (int i = 0; i < x2; i++) {
+            for (int i = 0; i > x2; i--) {
                 x1--;
             }
-        }
-        return x1;
-    }
-
-    public static double plus(double x1, double x2) {
-        for (int i = 0; i < x2; i++) {
-            x1++;
         }
         return x1;
     }
 
     // Returns x1 - x2
-    public static int minus(int x1, int x2) {
-        if ((x1 > 0) && (x2 > 0)) {
-            for (int i = 0; i < x2; i++) {
+    public static int minus(int x1, int x2)
+     {
+        int num=0;
+        if(x1==x2) return 0;
+        if ((x1 > 0) && (x2 > 0)) { //plus-plus
+            while( x2 >0)
+            {
+                x2--;
                 x1--;
             }
         }
-        if ((x1 < 0) && (x2 < 0)) {
-            for (int i = 0; i < abs(x2); i++) {
+        num=x1;
+        if ((x1<0) && (x2<0)) //minus -minus
+        {
+            while(x2<0)
+            {
+                x2++;
                 x1++;
             }
+            num=x1;    
         }
-        if ((x1 < 0) && (x2 > 0)) {
-            for (int i = 0; i < x2; i++) {
+        if ((x1<0) && (x2>0)) //minus -plus
+        {
+            while(x2<0)
+            {
+                x2--;
+                x1--;
+            }
+            num=x1;    
+        }
+        if ((x1>0) && (x2<0)) //minus -plus
+        {
+            while(x2<0)
+            {
+                x2++;
                 x1++;
             }
+            num=x1;    
         }
-        if ((x1 > 0) && (x2 < 0)) {
-            for (int i = 0; i < abs(x2); i++) {
-                x1++;
-            }
-        }
-        return x1;
+        return num;
     }
 
     // Returns x1 * x2
     public static int times(int x1, int x2) {
         int x3 = 0;
-        if ((x1 > 0) && (x2 > 0)) {
-            for (int i = 0; i < x1; i++) {
+        if((x1==0)||(x2==0)) return 0;
+        if((x1>0)&&(x2>0))
+        {
+            for(int i =0;i<x1;i++)
+            {
                 x3++;
-                for (int j = 1; j < x2; j++) {
+                for(int j=0;j<x2;j++)
+                {
                     x3++;
                 }
             }
-            return x3;
         }
-        if ((x1 < 0) && (x2 < 0)) {
-            for (int i = 0; i < x1; i++) {
+        if((x1<0)&&(x2<0)) // minus *minus
+        {
+            for(int i =0;i>x1;i--)
+            {
                 x3++;
-                for (int j = 1; j < x2; j++) {
+                for(int j=0;j>x2;j--)
+                {
                     x3++;
                 }
             }
-            return x3;
         }
-        if ((x1 < 0) || (x2 < 0)) {
-            for (int i = 0; i < x1; i++) {
-                x3++;
+        if((x1<0)||(x2<0)) // minus *plus
+        {
+            for(int i =0;i>(x1);i--)
+            {
+                x3--;
+                for(int j=0;j>(x2);j--)
+                {
+                    x3--;
+                }
             }
-            return times(-1, x3);
         }
         return x3; // Default return in case logic fails
     }
