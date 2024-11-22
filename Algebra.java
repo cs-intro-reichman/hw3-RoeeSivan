@@ -1,13 +1,7 @@
 public class Algebra {
     public static void main(String args[]) {
         // Tests some of the operations
-        System.out.println(plus(2, -3));
-        System.out.println(minus(-2, 3));
-        System.out.println(plus(2, 3));   // 2 + 3 good
-        System.out.println(minus(7, 2));  // 7 - 2 good
-        System.out.println(minus(2, 7));  // 2 - 7 good
-        System.out.println(minus(-2, -7));  // 2 - 7 good
-        System.out.println(times(3, 4));  // 3 * 4  good
+        System.out.println(minus(-10, -20));  // 3 * 4  good
         System.out.println(plus(2, times(4, 2)));  // 2 + 4 * 2 good
         System.out.println(pow(5, 3));      // 5^3 good
         System.out.println(pow(3, 5));      // 3^5 good
@@ -57,44 +51,19 @@ public class Algebra {
     // Returns x1 - x2
     public static int minus(int x1, int x2)
      {
-        int num=0;
         if(x1==x2) return 0;
-        if ((x1 > 0) && (x2 > 0)) { //plus-plus
-            while( x2 >0)
-            {
-                x2--;
+        if (x2 > 0) { // Decrement x1 by x2 times
+            while (x2 > 0) {
                 x1--;
-            }
-        }
-        num=x1;
-        if ((x1<0) && (x2<0)) //minus -minus
-        {
-            while(x2<0)
-            {
-                x2++;
-                x1++;
-            }
-            num=x1;    
-        }
-        if ((x1<0) && (x2>0)) //minus -plus
-        {
-            while(x2<0)
-            {
                 x2--;
-                x1--;
             }
-            num=x1;    
-        }
-        if ((x1>0) && (x2<0)) //minus -plus
-        {
-            while(x2<0)
-            {
-                x2++;
+        } else if (x2 < 0) { // Increment x1 by (-x2) times
+            while (x2 < 0) {
                 x1++;
+                x2++;
             }
-            num=x1;    
         }
-        return num;
+        return x1;
     }
 
     // Returns x1 * x2
@@ -123,9 +92,20 @@ public class Algebra {
                 }
             }
         }
-        if((x1<0)||(x2<0)) // minus *plus
+        if((x1<0)||(x2>0)) // minus *plus
         {
             for(int i =0;i>(x1);i--)
+            {
+                x3--;
+                for(int j=0;j<(x2);j++)
+                {
+                    x3--;
+                }
+            }
+        }
+        if((x1>0)||(x2<0)) // minus *plus
+        {
+            for(int i =0;i<(x1);i++)
             {
                 x3--;
                 for(int j=0;j>(x2);j--)
@@ -142,6 +122,10 @@ public class Algebra {
         int x1 = 1;
         for (int i = 0; i < n; i++) {
             x1 = times(x1, x);
+        }
+        if(n<0)
+        {
+
         }
         return x1;
     }
