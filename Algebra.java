@@ -1,9 +1,7 @@
 public class Algebra {
     public static void main(String args[]) {
         // Tests some of the operations
-        System.out.println(mod(25,7));
-        System.out.println(mod(0,7));
-        System.out.println(mod(7,3));
+        System.out.println(div(25,7));
     }
 
     public static int abs(int x) { // a method that will help me in the future - absolute value
@@ -137,6 +135,7 @@ public class Algebra {
                 x3++;
             }
         }
+        return x3-1;
     }
         if((x1is_negative)&&(x2is_negative)) // for minus minus
         {
