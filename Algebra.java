@@ -124,8 +124,10 @@ public class Algebra {
         int i=0;
         boolean x1is_negative = x1<0;
         boolean x2is_negative = x2<0;
+        if(x1==x2) return 1;
         if(abs(x1)==abs(x2)) return 1;
         if(abs(x2)>abs(x1)) return 0;
+        if(x2==1) return x1;
         if(x2==0) return -1;
         if((x1>0)&&(x2>0)) // for plus plus
         {
