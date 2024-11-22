@@ -1,8 +1,7 @@
 public class Algebra {
     public static void main(String args[]) {
         // Tests some of the operations
-        System.out.println(div(25,7));
-        System.out.println(div(100,10));
+        System.out.println(sqrt(76123));
     }
 
     public static int abs(int x) { // a method that will help me in the future - absolute value
@@ -168,9 +167,15 @@ public class Algebra {
 
     // Returns the integer part of sqrt(x)
     public static int sqrt(int x) {
+        int result =0;
         for (int i = 0; i <= x; i++) {
-            if (pow(i, 2) == x) {
+            if (pow(i, 2) == x) 
+            {
                 return i;
+            }
+            else if ((pow(i,2)>x))
+            {
+                return i-1;
             }
         }
         return 0;
