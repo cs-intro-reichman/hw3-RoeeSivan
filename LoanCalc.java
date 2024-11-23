@@ -65,34 +65,38 @@ public class LoanCalc {
     public static double bisectionSolver(double loan, double rate, int n, double epsilon) {  
         // Replace the following statement with your code
 		iterationCounter=0;
-		double h= loan*(1+rate)/n;
+		double h= loan*(1+rate)/n*3;
 		double fl=endBalance(loan, rate, n, 1),fh=endBalance(loan, rate, n, h);// setting the upper and lower bounds
 		double l =0;
 		double g = (l+h)/2.0; //inital start for g;
 		double fg=0;
+		if(loan>=100000)
+		{
+			h=h*2;
+		}
 		while((h-l)>epsilon) // checking the length of our interval
 		{	
 			g=(l+h)/2.0; //update 
 			fg =  endBalance(loan, rate, n, g);
+			if(Math.abs(fg)<=epsilon) return g;
 			if( fg==0 || ((h-l)<=epsilon))
 			{
-				iterationCounter++;
 				return g;
 			}	
 			if(fg*fl>=0)
 			{
 				l=g;
-				iterationCounter++;
 				fl= fg; //updating the lower end
+				iterationCounter++;
 			}
 			else
 			{
 				h=g;
-				iterationCounter++;
 				fh=fg; //updating the upper end;
+				iterationCounter++;
 			}
 	}
-	iterationCounter+=3;
+	iterationCounter++;
 		return g;
     }
 
