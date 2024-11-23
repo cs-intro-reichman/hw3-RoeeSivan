@@ -1,12 +1,10 @@
-
-
 /** Functions for checking if a given string is an anagram. */
 public class Anagram {
 	public static void main(String args[]) {
 		// Tests the isAnagram function.
 		String original = "hello";
         String randomized = Anagram.randomAnagram(original);
-        boolean test1 = Anagram.isAnagram(original, randomized);
+        boolean test1 = Anagram.isAnagram("hello", "world!");
         System.out.println(test1);
 		
 
@@ -31,40 +29,46 @@ public class Anagram {
 
 	// Returns true if the two given strings are anagrams, false otherwise.
 	public static boolean isAnagram(String str1, String str2) {
-
-		if (str1.equals("") && str2.equals("")) return true;
-		int c=0;
-		String s1 = preProcess(str1);
-		String s2 = preProcess(str2);
-		s1= deleteSpaces(s1);
-		s2= deleteSpaces(s2);
-		if(s1.length()!=s2.length())
-		{
-		return false;
-		}
-		int max = Math.max(s1.length(),s2.length());
-		int min = Math.min(s1.length(),s2.length());
-		char ch1,ch2;
-		boolean foundMatch=false;
-		for(int i=0;i<max;i++)
-		{
-			ch1=s1.charAt(i);
-			 foundMatch =false;
-			for(int j=0;j<max;j++)
-			{
-				if(s2.charAt(j)==ch1)
-				{
-					s2=s2.substring(0,j)+ "*" + s2.substring(j + 1);
-					foundMatch=true;
-					c++;
-				}
-			}
-	}
-	    if ((c%2==0)||(foundMatch))
-		{
+		// Handle the case for both empty strings
+		if (str1.equals("") && str2.equals("")) {
 			return true;
 		}
-		return false;
+	
+		// Preprocess and remove spaces from both strings
+		String s1 = preProcess(str1);
+		String s2 = preProcess(str2);
+		s1 = deleteSpaces(s1);
+		s2 = deleteSpaces(s2);
+	
+		// If lengths are different after processing, they can't be anagrams
+		if (s1.length() != s2.length()) {
+			return false;
+		}
+	
+		// Compare the characters of the strings
+		int c = 0;
+		int max = s1.length();
+		boolean foundMatch = false;
+	
+		// Loop through the characters in the first string
+		for (int i = 0; i < max; i++) {
+			char ch1 = s1.charAt(i);
+			foundMatch = false;
+	
+			// Loop through the characters in the second string to find a match
+			for (int j = 0; j < max; j++) {
+				if (s2.charAt(j) == ch1) {
+					c++;
+					s2 = s2.substring(0, j) + "*" + s2.substring(j + 1); // Mark this character as matched
+					foundMatch = true;
+					break;
+				}
+			}
+		}
+	
+		// If at least one match is found and the counts are correct, it's an anagram
+		return c == max;
+	
 	}
 	   
 	// Returns a preprocessed version of the given string: all the letter characters are converted
@@ -92,9 +96,8 @@ public class Anagram {
 				result.append(str.charAt(i));
 			}
 		}
-		return result.toString();
+		return result.toString().toLowerCase();
 	}
-	   
 	// Returns a random anagram of the given string. The random anagram consists of the same
 	// characters as the given string, re-arranged in a random order. 
 	public static String randomAnagram(String str) {
