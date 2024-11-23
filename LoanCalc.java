@@ -70,7 +70,7 @@ public class LoanCalc {
 		double l =0;
 		double g = (l+h)/2.0; //inital start for g;
 		double fg=0;
-		if(loan>=100000)
+		if(loan>=100000) // need to increase the upper bound for larger numbers
 		{
 			h=h*2;
 		}
