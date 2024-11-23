@@ -12,9 +12,7 @@ public class LoanCalc {
 		double loan = Double.parseDouble(args[0]);
 		double rate = Double.parseDouble(args[1]);
 		int n = Integer.parseInt(args[2]);
-		double payment =Integer.parseInt(args[3]);
 		System.out.println("Loan = " + loan + ", interest rate = " + rate + "%, periods = " + n);
-		System.out.println(endBalance(loan, rate, n, payment));
 
 		// Computes the periodical payment using brute force search
 		System.out.print("\nPeriodical payment, using brute force: ");
@@ -31,7 +29,6 @@ public class LoanCalc {
 	// interest rate (as a percentage), the number of periods (n), and the periodical payment.
 	private static double endBalance(double loan, double rate, int n, double payment) {	
 		// Replace the following statement with your code
-		double currentBalance = 0;
 		double sum=0;
 		sum =loan;
 		for(int i=0;i<n;i++)
@@ -69,7 +66,7 @@ public class LoanCalc {
         // Replace the following statement with your code
 		iterationCounter=0;
 		double h= loan*(1+rate)/n;
-		double f = endBalance(loan, rate, n, epsilon),fl=endBalance(loan, rate, n, 1),fh=endBalance(loan, rate, n, h);// setting the upper and lower bounds
+		double fl=endBalance(loan, rate, n, 1),fh=endBalance(loan, rate, n, h);// setting the upper and lower bounds
 		double l =0;
 		double g = (l+h)/2.0; //inital start for g;
 		while((h-l)>=epsilon) // checking the length of our interval
