@@ -1,3 +1,5 @@
+
+
 /** Functions for checking if a given string is an anagram. */
 public class Anagram {
 	public static void main(String args[]) {
@@ -6,6 +8,8 @@ public class Anagram {
 		System.out.println(isAnagram("William Shakespeare","I am a weakish speller")); // true
 		System.out.println(isAnagram("Madam Curie","Radium came")); // true
 		System.out.println(isAnagram("Tom Marvolo Riddle","I am Lord Voldemort")); // true
+		System.out.println(isAnagram("hello","world!"));
+		
 
 		// Tests the preProcess function.
 		System.out.println(preProcess("What? No way!!!"));
@@ -28,9 +32,14 @@ public class Anagram {
 
 	// Returns true if the two given strings are anagrams, false otherwise.
 	public static boolean isAnagram(String str1, String str2) {
-		if((str1.equals("")) ||(str2.equals(""))) return false;
+
+		if (str1.equals("") && str2.equals("")) return true;
+		int c=0;
 		String s1 = preProcess(str1);
 		String s2 = preProcess(str2);
+
+		int max = Math.max(s1.length(),s2.length());
+		int min = Math.min(s1.length(),s2.length());
 		char ch1,ch2;
 		boolean equals=false;//default value false;
 		for(int i=0;i<s1.length();i++)
@@ -42,10 +51,16 @@ public class Anagram {
 				if(ch1==ch2)
 				{
 					equals= true;
+					c++;
 				}
 			}
 		}
-		return equals;
+		if(c%2==0) 
+		{
+		return true;
+		}
+		else
+		return false;
 	}
 	   
 	// Returns a preprocessed version of the given string: all the letter characters are converted
@@ -55,11 +70,13 @@ public class Anagram {
 		// Replace the following statement with your code
 		String text = str.toLowerCase();
 		String str1="";
-		for(int i=0;i<str.length();i++)
+		char currentchar;
+		for(int i=0;i<text.length();i++)
 		{
-			if((text.charAt(i)>='a' && text.charAt(i)<='z') || text.charAt(i)==' ')
+			currentchar = text.charAt(i);
+			if((text.charAt(i)>='a' && text.charAt(i)<='z'))
 			{
-				str1 = str1 + text.charAt(i);
+				str1+=currentchar;
 			}
 		}
 		return str1;
