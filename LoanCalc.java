@@ -71,25 +71,29 @@ public class LoanCalc {
 		double g = (l+h)/2.0; //inital start for g;
 		double fg=0;
 		while((h-l)>epsilon) // checking the length of our interval
-		{	iterationCounter++;	
+		{	
 			g=(l+h)/2.0; //update 
 			fg =  endBalance(loan, rate, n, g);
 			if( fg==0 || ((h-l)<=epsilon))
-			{	
+			{
+				iterationCounter++;
 				return g;
 			}	
-			if(fg*fl>0)
-			{	iterationCounter--;	
+			if(fg*fl>=0)
+			{
 				l=g;
+				iterationCounter++;
 				fl= fg; //updating the lower end
 			}
 			else
 			{
-				iterationCounter++;		
 				h=g;
+				iterationCounter++;
 				fh=fg; //updating the upper end;
 			}
-		}
+	}
+	iterationCounter+=3;
 		return g;
     }
+
 }
