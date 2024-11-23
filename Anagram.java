@@ -9,6 +9,7 @@ public class Anagram {
 		System.out.println(isAnagram("Madam Curie","Radium came")); // true
 		System.out.println(isAnagram("Tom Marvolo Riddle","I am Lord Voldemort")); // true
 		System.out.println(isAnagram("hello","world!"));
+
 		
 
 		// Tests the preProcess function.
@@ -37,15 +38,16 @@ public class Anagram {
 		int c=0;
 		String s1 = preProcess(str1);
 		String s2 = preProcess(str2);
-
+		s1= deleteSpaces(s1);
+		s2= deleteSpaces(s2);
 		int max = Math.max(s1.length(),s2.length());
 		int min = Math.min(s1.length(),s2.length());
 		char ch1,ch2;
 		boolean equals=false;//default value false;
-		for(int i=0;i<s1.length();i++)
+		for(int i=0;i<min;i++)
 		{
 			ch1=s1.charAt(i);
-			for(int j=0;j<s2.length();j++)
+			for(int j=0;j<min;j++)
 			{
 				ch2 = s2.charAt(j);
 				if(ch1==ch2)
@@ -74,13 +76,22 @@ public class Anagram {
 		for(int i=0;i<text.length();i++)
 		{
 			currentchar = text.charAt(i);
-			if((text.charAt(i)>='a' && text.charAt(i)<='z'))
+			if((text.charAt(i)>='a' && text.charAt(i)<='z') ||(text.charAt(i)==' '))
 			{
 				str1+=currentchar;
 			}
 		}
 		return str1;
 	} 
+	public static String deleteSpaces(String str) {
+		StringBuilder result = new StringBuilder();
+		for (int i = 0; i < str.length(); i++) {
+			if (str.charAt(i) != ' ') {
+				result.append(str.charAt(i));
+			}
+		}
+		return result.toString();
+	}
 	   
 	// Returns a random anagram of the given string. The random anagram consists of the same
 	// characters as the given string, re-arranged in a random order. 
@@ -96,6 +107,7 @@ public class Anagram {
 			ch = str.charAt(num);
 			str = str.substring(0, num) + str.substring(num + 1);
 			strChange = strChange+ ch;	
+			length--;
 		}
 		return strChange;
 	}
