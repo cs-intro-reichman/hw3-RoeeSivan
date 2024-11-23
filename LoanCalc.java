@@ -69,22 +69,23 @@ public class LoanCalc {
 		double fl=endBalance(loan, rate, n, 1),fh=endBalance(loan, rate, n, h);// setting the upper and lower bounds
 		double l =0;
 		double g = (l+h)/2.0; //inital start for g;
-		while((h-l)>=epsilon) // checking the length of our interval
-		{
-			iterationCounter++;
+		double fg=0;
+		while((h-l)>epsilon) // checking the length of our interval
+		{	iterationCounter++;	
 			g=(l+h)/2.0; //update 
-			double fg =  endBalance(loan, rate, n, g);
-			if(Math.abs(fg)<epsilon)
-			{
+			fg =  endBalance(loan, rate, n, g);
+			if( fg==0 || ((h-l)<=epsilon))
+			{	
 				return g;
-			}
+			}	
 			if(fg*fl>0)
-			{
+			{	iterationCounter--;	
 				l=g;
 				fl= fg; //updating the lower end
 			}
 			else
 			{
+				iterationCounter++;		
 				h=g;
 				fh=fg; //updating the upper end;
 			}
