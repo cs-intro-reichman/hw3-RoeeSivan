@@ -9,6 +9,7 @@ public class Anagram {
 		System.out.println(isAnagram("Madam Curie","Radium came")); // true
 		System.out.println(isAnagram("Tom Marvolo Riddle","I am Lord Voldemort")); // true
 		System.out.println(isAnagram("hello","world!"));
+		System.out.println(randomAnagram("EITHAN"));
 
 		
 
@@ -101,13 +102,13 @@ public class Anagram {
 		String strChange="";
 		int num;
 		char ch;
-		for(int i =0;i<length;i++)
+		while(length>0)
 		{
+			length--;
 			num = (int) (Math.random() * length);
 			ch = str.charAt(num);
 			str = str.substring(0, num) + str.substring(num + 1);
 			strChange = strChange+ ch;	
-			length--;
 		}
 		return strChange;
 	}
