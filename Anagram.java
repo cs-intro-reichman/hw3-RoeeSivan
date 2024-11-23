@@ -4,13 +4,10 @@
 public class Anagram {
 	public static void main(String args[]) {
 		// Tests the isAnagram function.
-		System.out.println(isAnagram("silent","listen"));  // true
-		System.out.println(isAnagram("William Shakespeare","I am a weakish speller")); // true
-		System.out.println(isAnagram("Madam Curie","Radium came")); // true
-		System.out.println(isAnagram("Tom Marvolo Riddle","I am Lord Voldemort")); // true
-		System.out.println(isAnagram("hello","world!"));
-		System.out.println(randomAnagram("EITHAN"));
-
+		String original = "hello";
+        String randomized = Anagram.randomAnagram(original);
+        boolean test1 = Anagram.isAnagram(original, randomized);
+        System.out.println(test1);
 		
 
 		// Tests the preProcess function.
@@ -41,28 +38,32 @@ public class Anagram {
 		String s2 = preProcess(str2);
 		s1= deleteSpaces(s1);
 		s2= deleteSpaces(s2);
+		if(s1.length()!=s2.length())
+		{
+		return false;
+		}
 		int max = Math.max(s1.length(),s2.length());
 		int min = Math.min(s1.length(),s2.length());
 		char ch1,ch2;
-		boolean equals=false;//default value false;
-		for(int i=0;i<min;i++)
+		boolean foundMatch=false;
+		for(int i=0;i<max;i++)
 		{
 			ch1=s1.charAt(i);
-			for(int j=0;j<min;j++)
+			 foundMatch =false;
+			for(int j=0;j<max;j++)
 			{
-				ch2 = s2.charAt(j);
-				if(ch1==ch2)
+				if(s2.charAt(j)==ch1)
 				{
-					equals= true;
+					s2=s2.substring(0,j)+ "*" + s2.substring(j + 1);
+					foundMatch=true;
 					c++;
 				}
 			}
-		}
-		if(c%2==0) 
+	}
+	    if ((c%2==0)||(foundMatch))
 		{
-		return true;
+			return true;
 		}
-		else
 		return false;
 	}
 	   
@@ -103,12 +104,12 @@ public class Anagram {
 		int num;
 		char ch;
 		while(length>0)
-		{
-			length--;
+		{	
 			num = (int) (Math.random() * length);
 			ch = str.charAt(num);
-			str = str.substring(0, num) + str.substring(num + 1);
 			strChange = strChange+ ch;	
+			length--;
+			str = str.substring(0, num) + str.substring(num + 1);
 		}
 		return strChange;
 	}
