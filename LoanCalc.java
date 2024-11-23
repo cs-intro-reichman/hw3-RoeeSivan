@@ -29,7 +29,13 @@ public class LoanCalc {
 	// interest rate (as a percentage), the number of periods (n), and the periodical payment.
 	private static double endBalance(double loan, double rate, int n, double payment) {	
 		// Replace the following statement with your code
-		return 0;
+		double sum=0;
+		sum =loan;
+		for(int i=0;i<n;i++)
+		{
+			sum=(sum - payment)*(1+rate/100);
+		}
+		return sum;
 	}
 	
 	// Uses sequential search to compute an approximation of the periodical payment
@@ -38,8 +44,17 @@ public class LoanCalc {
 	// the number of periods (n), and epsilon, the approximation's accuracy
 	// Side effect: modifies the class variable iterationCounter.
     public static double bruteForceSolver(double loan, double rate, int n, double epsilon) {
-		// Replace the following statement with your code
-		return 0;
+		//
+		iterationCounter=0;
+		double g = loan/n; // first current guess
+		double f = endBalance(loan, rate, n, g);
+		while(f>0)
+		{
+			g=g+epsilon;
+			f = endBalance(loan, rate, n, g);
+			iterationCounter++;
+		}
+		return g;
     }
     
     // Uses bisection search to compute an approximation of the periodical payment 
@@ -49,6 +64,40 @@ public class LoanCalc {
 	// Side effect: modifies the class variable iterationCounter.
     public static double bisectionSolver(double loan, double rate, int n, double epsilon) {  
         // Replace the following statement with your code
-		return 0;
+		iterationCounter=0;
+		double h= loan*(1+rate)/n*3;
+		double fl=endBalance(loan, rate, n, 1),fh=endBalance(loan, rate, n, h);// setting the upper and lower bounds
+		double l =0;
+		double g = (l+h)/2.0; //inital start for g;
+		double fg=0;
+		if(loan>=100000) // need to increase the upper bound for larger numbers
+		{
+			h=h*2;
+		}
+		while((h-l)>epsilon) // checking the length of our interval
+		{	
+			g=(l+h)/2.0; //update 
+			fg =  endBalance(loan, rate, n, g);
+			if(Math.abs(fg)<=epsilon) return g;
+			if( fg==0 || ((h-l)<=epsilon))
+			{
+				return g;
+			}	
+			if(fg*fl>=0)
+			{
+				l=g;
+				fl= fg; //updating the lower end
+				iterationCounter++;
+			}
+			else
+			{
+				h=g;
+				fh=fg; //updating the upper end;
+				iterationCounter++;
+			}
+	}
+	iterationCounter++;
+		return g;
     }
+
 }
